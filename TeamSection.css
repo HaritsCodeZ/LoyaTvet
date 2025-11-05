@@ -1,0 +1,201 @@
+.team-section {
+  background: radial-gradient(circle at top, #0f0f1f 0%, #000 90%);
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 6rem 1rem;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.team-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(0.45); /* ✅ Adjust this: higher = brighter, lower = darker */
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* ✅ Adjust this: higher opacity = darker overlay */
+  z-index: -1;
+}
+
+.team-title span {
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.team-subtitle {
+  color: #a3a3a3;
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+  letter-spacing: 0.5px;
+}
+
+.carousel-container {
+  perspective: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 560px;
+}
+
+.carousel {
+  width: 380px;
+  height: 500px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;
+  height: 500px;
+}
+
+.team-card {
+  width: 100%;
+  height: 100%;
+  background: rgba(238, 238, 238, 0.06);
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+  backdrop-filter: blur(15px);
+  transition: all 0.6s ease;
+}
+
+.team-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.5);
+}
+
+.team-image {
+  position: relative;
+  height: 72%;
+}
+
+.team-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.team-image:hover img {
+  transform: scale(1.08);
+}
+
+.team-info {
+  margin-top: 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.team-info h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.5px;
+}
+
+.role {
+  color: #8b5cf6;
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+}
+
+.desc {
+  color: #d1d5db;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  position: absolute;
+}
+
+.nav-btn.left {
+  left: 10%;
+}
+
+.nav-btn.right {
+  right: 10%;
+}
+
+.nav-btn:hover {
+  background: rgba(139, 92, 246, 0.6);
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.dots {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #8b5cf6;
+  transform: scale(1.4);
+  box-shadow: 0 0 12px #8b5cf6;
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    transform: none !important;
+  }
+  .carousel-item {
+    position: relative;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .nav-btn {
+    display: none;
+  }
+  .team-card {
+    width: 90%;
+    margin: auto;
+  }
+}
