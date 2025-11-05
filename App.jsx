@@ -1,8 +1,10 @@
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
-import Chat from "./Chat"; // <-- we'll create this next
+import Chat from "./Chat";
+import Team from "./Team"; // 👈 make sure Team.jsx exists in src/
 
-function App() {
+function Home() {
   const messages = [
     "SELAMAT DATANG KE LOYA TVET, SEDIA MEMBANTU!",
     "SYARAT KEMASUKAN KOLEJ VOKASIONAL? TANYA LOYA TVET SEKARANG!",
@@ -12,22 +14,21 @@ function App() {
   ];
 
   const [index, setIndex] = useState(0);
-  const [flip, setFlip] = useState(false);
+  const [fade, setFade] = useState(false);
   const [isChatMode, setChatMode] = useState(false);
   const [question, setQuestion] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFlip(true);
+      setFade(true);
       setTimeout(() => {
         setIndex((prev) => (prev + 1) % messages.length);
-        setFlip(false);
-      }, 600);
+        setFade(false);
+      }, 1000);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  // ✨ Handle pressing Enter to go to Chat mode
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.target.value.trim()) {
       setQuestion(e.target.value.trim());
@@ -40,16 +41,14 @@ function App() {
     <div className="cosmic-bg">
       {!isChatMode ? (
         <>
-          {/* 🌌 NAVBAR — GLOWING + TRANSLUCENT */}
           <nav className="cosmic-nav">
             <div className="nav-links">
               <a href="#kolej" className="nav-link">Kolej Kami</a>
-              <a href="#pasukan" className="nav-link">Pasukan Kami</a>
+              <Link to="/team" className="nav-link">Pasukan Kami</Link> {/* 👈 changed to Link */}
               <a href="#hubungi" className="nav-link">Hubungi Kami</a>
             </div>
           </nav>
 
-          {/* 🪩 HERO SECTION */}
           <div className="hero-center">
             <img
               src="/BIG TITLE_1.png"
@@ -57,11 +56,12 @@ function App() {
               className="main-banner"
             />
 
-            <p className={`hero-subtitle ${flip ? "flip" : ""}`}>
-              {messages[index]}
-            </p>
+            <div className="hero-subtitle-wrapper">
+              <p className={`hero-subtitle ${fade ? "fade" : ""}`}>
+                {messages[index]}
+              </p>
+            </div>
 
-            {/* 💬 AI Input Section */}
             <div className="ai-input-container">
               <div className="ai-input-bar animated-gradient">
                 <span className="sparkle">✨</span>
@@ -90,20 +90,25 @@ function App() {
             </div>
           </div>
 
-          {/* 🌠 BACKGROUND VIDEO */}
           <video className="video-bg" autoPlay loop muted playsInline>
             <source src="/Video_BackUltras.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </>
       ) : (
-        <Chat
-          initialQuestion={question}
-          onExit={() => setChatMode(false)}
-        />
+        <Chat initialQuestion={question} onExit={() => setChatMode(false)} />
       )}
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/team" element={<Team />} />
+      </Routes>
+    </Router>
+  );
+}
